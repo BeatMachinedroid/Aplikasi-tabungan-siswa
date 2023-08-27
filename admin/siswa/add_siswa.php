@@ -89,36 +89,47 @@
 </section>
 
 <?php
-
-    if (isset ($_POST['Simpan'])){
+if (isset($_POST['Simpan'])) {
+    $nis = $_POST['nis'];
+    $nama = $_POST['nama_siswa'];
+    $jakel = $_POST['jekel'];
+    $id_kelas = $_POST['id_kelas'];
+    $status = 'aktif';
+    $tgl_lahir = $_POST['tgl_lahir'];
     
-        $sql_simpan = "INSERT INTO tb_siswa (nis,nama_siswa,jekel,id_kelas,status,tgl_lahir) VALUES (
-           '".$_POST['nis']."',
-          '".$_POST['nama_siswa']."',
-          '".$_POST['jekel']."',
-          '".$_POST['id_kelas']."',
-          'Aktif',
-          '".$_POST['tgl_lahir']."')";
-        $query_simpan = mysqli_query($koneksi, $sql_simpan);
-        mysqli_close($koneksi);
-
-    if ($query_simpan){
-
-      echo "<script>
-      Swal.fire({title: 'Tambah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
-      }).then((result) => {
-          if (result.value) {
-              window.location = 'index.php?page=MyApp/data_siswa';
-          }
-      })</script>";
-      }else{
-      echo "<script>
-      Swal.fire({title: 'Tambah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
-      }).then((result) => {
-          if (result.value) {
-              window.location = 'index.php?page=MyApp/add_siswa';
-          }
-      })</script>";
+    // Make sure you have the proper database connection ($koneksi) established before executing the query
+    $sql_simpan = "INSERT INTO tb_siswa (nis, nama_siswa, jekel, id_kelas, status, tgl_lahir) VALUES ('$nis', '$nama', '$jakel', '$id_kelas', '$status', '$tgl_lahir')";
+    
+    $query_simpan = mysqli_query($koneksi, $sql_simpan);
+	// if (!$query_simpan) {
+	// 	die("Query failed: " . $koneksi->error);
+	// }
+    if ($query_simpan) {
+        echo "<script>
+            Swal.fire({
+                title: 'Tambah Data Berhasil',
+                text: '',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.value) {
+                    window.location = 'index.php?page=MyApp/data_siswa';
+                }
+            });
+        </script>";
+    } else {
+        echo "<script>
+            Swal.fire({
+                title: 'Tambah Data Gagal',
+                text: '',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.value) {
+                    window.location = 'index.php?page=MyApp/add_siswa';
+                }
+            });
+        </script>";
     }
-  }
-    
+}
+?>

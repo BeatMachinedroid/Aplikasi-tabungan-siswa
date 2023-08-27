@@ -50,6 +50,11 @@
 							<input class="form-control" name="kelas" value="<?php echo $data_cek['kelas']; ?>"
 							/>
 						</div>
+						<div class="form-group">
+							<label>Wali Kelas</label>
+							<input class="form-control" name="wl_kelas" value="<?php echo $data_cek['wl_kelas']; ?>"
+							/>
+						</div>
 
 					</div>
 					<!-- /.box-body -->

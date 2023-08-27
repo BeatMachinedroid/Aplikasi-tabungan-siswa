@@ -27,18 +27,20 @@ SET time_zone = "+00:00";
 -- Table structure for table `tb_kelas`
 --
 
+
 CREATE TABLE `tb_kelas` (
   `id_kelas` int(11) NOT NULL,
-  `kelas` varchar(20) NOT NULL
+  `kelas` varchar(20) NOT NULL,
+  `wl_kelas` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_kelas`
 --
 
-INSERT INTO `tb_kelas` (`id_kelas`, `kelas`) VALUES
-(1, 'Kelas 1'),
-(2, 'Kelas 2');
+INSERT INTO `tb_kelas` (`id_kelas`, `kelas`, `wl_kelas`) VALUES
+(1, 'Kelas 1', 'Zainal Arifin'),
+(2, 'Kelas 2', 'Citra');
 
 -- --------------------------------------------------------
 
@@ -95,18 +97,18 @@ CREATE TABLE `tb_siswa` (
   `jekel` enum('LK','PR') NOT NULL,
   `id_kelas` int(11) NOT NULL,
   `status` enum('Aktif','Lulus','Pindah') NOT NULL,
-  `tgl_lahir` date() NOT NULL
+  `tgl_lahir` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_siswa`
 --
 
-INSERT INTO `tb_siswa` (`nis`, `nama_siswa`, `jekel`, `id_kelas`, `status`, `th_masuk`) VALUES
-('100', 'Abdul', 'LK', 1, 'Aktif', 2020),
-('123', 'Ana', 'LK', 1, 'Aktif', 2001),
-('124', 'Budi', 'LK', 1, 'Aktif', 2001),
-('145', 'Candra', 'LK', 1, 'Aktif', 2001);
+INSERT INTO `tb_siswa` (`nis`, `nama_siswa`, `jekel`, `id_kelas`, `status`, `tgl_lahir`) VALUES
+('100', 'Abdul', 'LK', 1, 'Aktif', '2020-1-1'),
+('123', 'Ana', 'LK', 1, 'Aktif', '2001-2-2'),
+('124', 'Budi', 'LK', 1, 'Aktif', '2001-3-3'),
+('145', 'Candra', 'LK', 1, 'Aktif', '2001-4-4');
 
 -- --------------------------------------------------------
 

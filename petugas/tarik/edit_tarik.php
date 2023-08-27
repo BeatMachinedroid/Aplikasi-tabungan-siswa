@@ -1,7 +1,7 @@
 <?php
 
     if(isset($_GET['kode'])){
-        $sql_cek = "select s.nis, s.nama_siswa, t.id_tabungan, t.tarik, t.tgl, t.wali_kelas from 
+        $sql_cek = "select s.nis, s.nama_siswa, t.id_tabungan, t.tarik, t.tgl, t.petugas from 
         tb_siswa s join tb_tabungan t on s.nis=t.nis 
         where jenis ='TR' and id_tabungan='".$_GET['kode']."'";
         $query_cek = mysqli_query($koneksi, $sql_cek);

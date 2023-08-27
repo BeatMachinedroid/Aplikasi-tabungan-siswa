@@ -38,6 +38,7 @@
 							<th>Nama</th>
 							<th>JK</th>
 							<th>Kelas</th>
+							<th>Wali Kelas</th>
 							<th>Status</th>
 							<th>Tanggal Lahir</th>
 							<th>Aksi</th>
@@ -47,7 +48,7 @@
 
 						<?php
                   $no = 1;
-				  $query = "SELECT s.nis, s.nama_siswa, s.jekel, s.status, s.th_masuk, k.kelas 
+				  $query = "SELECT s.nis, s.nama_siswa, s.jekel, s.status, s.tgl_lahir, k.kelas, k.wl_kelas
 				  FROM tb_siswa s INNER JOIN tb_kelas k ON s.id_kelas=k.id_kelas ORDER BY kelas ASC, nis ASC";
                   $sql = $koneksi->query($query);
 
@@ -79,6 +80,9 @@
 							</td>
 							<td>
 								<?php echo $data['kelas']; ?>
+							</td>
+							<td>
+								<?php echo $data['wl_kelas']; ?>
 							</td>
 
 							<?php $warna = $data['status']  ?>

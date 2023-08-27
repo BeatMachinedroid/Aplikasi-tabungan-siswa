@@ -37,6 +37,10 @@
 							<label>Kelas</label>
 							<input type="text" name="kelas" id="kelas" class="form-control" placeholder="Kelas">
 						</div>
+						<div class="form-group">
+							<label>Kelas</label>
+							<input type="text" name="wl_kelas" id="wl_kelas" class="form-control" placeholder="wali kelas">
+						</div>
 
 					</div>
 					<!-- /.box-body -->

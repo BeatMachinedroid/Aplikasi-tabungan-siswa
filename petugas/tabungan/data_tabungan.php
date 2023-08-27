@@ -88,10 +88,12 @@
 							<th>No</th>
 							<th>NIS</th>
 							<th>Nama</th>
+							<th>Kelas</th>
+							<th>Wali Kelas</th>
 							<th>Tanggal</th>
 							<th>Setoran</th>
 							<th>Tarikan</th>
-							<th>Wali Kelas</th>
+							<th>petugas</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -99,9 +101,14 @@
 						<?php
 
                   $no = 1;
-				  $sql = $koneksi->query("select s.nis, s.nama_siswa, t.id_tabungan, t.setor, t.tarik, t.tgl, t.wali_kelas from 
-				  tb_siswa s join tb_tabungan t on s.nis=t.nis 
+				  $sql = $koneksi->query("SELECT s.nis, s.nama_siswa,s.id_kelas, t.id_tabungan, t.setor, t.tarik, t.tgl, t.petugas, k.wl_kelas, k.kelas 
+				  FROM tb_siswa s 
+				  JOIN tb_tabungan t ON s.nis = t.nis 
+				  JOIN tb_kelas k ON s.id_kelas = k.id_kelas 
 				  where s.nis ='$nis' order by tgl asc");
+				  if (!$sql) {
+					die("Query failed: " . $koneksi->error);
+				}
                   while ($data= $sql->fetch_assoc()) {
                 ?>
 
@@ -116,6 +123,12 @@
 								<?php echo $data['nama_siswa']; ?>
 							</td>
 							<td>
+								<?php echo $data['kelas']; ?>
+							</td>
+							<td>
+								<?php echo $data['wl_kelas']; ?>
+							</td>
+							<td>
 								<?php  $tgl = $data['tgl']; echo date("d/M/Y", strtotime($tgl))?>
 							</td>
 							<td align="right">
@@ -125,7 +138,7 @@
 								<?php echo rupiah($data['tarik']); ?>
 							</td>
 							<td>
-								<?php echo $data['wali_kelas']; ?>
+								<?php echo $data['petugas']; ?>
 							</td>
 						</tr>
 						<?php

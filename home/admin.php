@@ -173,3 +173,59 @@
 			</div>
 		</div>
 	</section>
+
+	<section class="content">
+		<div class="row">
+			<div class="box box-primary">
+				<div class="box-header">
+					<strong>Chart</strong>
+						
+				</div>
+				<div style="width: 80%; margin: auto;">
+					<canvas id="classChart"></canvas>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<?php
+    // Your SQL query
+    $sql = $koneksi->query("SELECT k.kelas, k.wl_kelas, SUM(t.setor) AS total_setor
+	FROM tb_siswa s
+	JOIN tb_tabungan t ON s.nis = t.nis
+	JOIN tb_kelas k ON s.id_kelas = k.id_kelas
+	WHERE t.jenis = 'ST'
+	GROUP BY k.kelas
+	ORDER BY k.kelas");
+
+
+// Fetch data using the modified query and store it in an array
+$classData = [];
+while ($row = $sql->fetch_assoc()) {
+	$classData[] = $row;
+}
+?>
+
+<script>
+	var ctx = document.getElementById('classChart').getContext('2d');
+	var classChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: <?php echo json_encode(array_column($classData, 'kelas')); ?>,
+			datasets: [{
+				label: 'Total Setor per Class',
+				data: <?php echo json_encode(array_column($classData, 'total_setor')); ?>,
+				backgroundColor: 'rgba(75, 192, 192, 0.2)',
+				borderColor: 'rgba(75, 192, 192, 1)',
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true
+				}
+			}
+		}
+	});
+    </script>

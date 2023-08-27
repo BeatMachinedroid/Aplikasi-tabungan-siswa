@@ -96,7 +96,7 @@ $tanggal = date("Y-m-d");
 		//membuang Rp dan Titik
 		$tarik_hasil=preg_replace("/[^0-9]/", "", $tarik);
 
-		$sql_simpan = "INSERT INTO tb_tabungan (nis,setor,tarik,tgl,jenis,wali_kelas) VALUES (
+		$sql_simpan = "INSERT INTO tb_tabungan (nis,setor,tarik,tgl,jenis,petugas) VALUES (
 			'".$_POST['nis']."',
 			'0',
 			'".$tarik_hasil."',

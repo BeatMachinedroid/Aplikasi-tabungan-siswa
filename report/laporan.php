@@ -52,7 +52,10 @@
 
         if(isset($_POST["btnCetak"])){
            
-            $sql_tampil = "select * from tb_tabungan where tgl BETWEEN '$dt1' AND '$dt2' order by tgl asc";
+            $sql_tampil = "SELECT s.nis, s.nama_siswa,s.id_kelas, t.id_tabungan, t.setor,t.tarik, t.tgl, t.petugas, k.wl_kelas, k.kelas 
+			FROM tb_siswa s 
+			JOIN tb_tabungan t ON s.nis = t.nis 
+			JOIN tb_kelas k ON s.id_kelas = k.id_kelas where tgl BETWEEN '$dt1' AND '$dt2' order by tgl asc";
             }
             $query_tampil = mysqli_query($koneksi, $sql_tampil);
             $no=1;
@@ -67,7 +70,7 @@
 							&emsp;&emsp;&emsp;
 						</td>
 						<td>
-							<?php echo $data['wali_kelas']; ?>
+							<?php echo $data['wl_kelas']; ?>
 							&emsp;&emsp;&emsp;
 						</td>
 						<td align="right">

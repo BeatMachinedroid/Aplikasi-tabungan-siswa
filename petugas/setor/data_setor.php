@@ -59,9 +59,11 @@ $data_nama = $_SESSION["ses_nama"];
 							<th>No</th>
 							<th>NIS</th>
 							<th>Nama</th>
+							<th>Kelas</th>
+							<th>Wali Kelas</th>
 							<th>Tanggal</th>
 							<th>Setoran</th>
-							<th>Wali Kelas</th>
+							<th>Petugas</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
@@ -70,9 +72,14 @@ $data_nama = $_SESSION["ses_nama"];
 						<?php
 
                   $no = 1;
-				  $sql = $koneksi->query("select s.nis, s.nama_siswa, t.id_tabungan, t.setor, t.tgl, t.wali_kelas from 
-				  tb_siswa s join tb_tabungan t on s.nis=t.nis 
-				  where jenis ='ST' order by tgl desc, id_tabungan desc");
+				  $sql = $koneksi->query("SELECT s.nis, s.nama_siswa,s.id_kelas, t.id_tabungan, t.setor, t.tgl, t.petugas, k.wl_kelas, k.kelas 
+				  FROM tb_siswa s 
+				  JOIN tb_tabungan t ON s.nis = t.nis 
+				  JOIN tb_kelas k ON s.id_kelas = k.id_kelas WHERE t.jenis = 'ST' 
+				   ORDER BY t.tgl DESC, t.id_tabungan DESC");
+				  if (!$sql) {
+					die("Query failed: " . $koneksi->error);
+				}
                   while ($data= $sql->fetch_assoc()) {
                 ?>
 
@@ -87,13 +94,20 @@ $data_nama = $_SESSION["ses_nama"];
 								<?php echo $data['nama_siswa']; ?>
 							</td>
 							<td>
+								<?php echo $data['kelas']; ?>
+							</td>
+							<td>
+								<?php echo $data['wl_kelas']; ?>
+							</td>
+							<td>
 								<?php  $tgl = $data['tgl']; echo date("d/M/Y", strtotime($tgl))?>
 							</td>
 							<td align="right">
 								<?php echo rupiah($data['setor']); ?>
 							</td>
+							
 							<td>
-								<?php echo $data['wali_kelas']; ?>
+								<?php echo $data['petugas']; ?>
 							</td>
 							<td>
 

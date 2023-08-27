@@ -50,6 +50,7 @@
 	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="hold-transition skin-red sidebar-mini">

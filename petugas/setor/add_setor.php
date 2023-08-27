@@ -56,10 +56,11 @@ $tanggal = date("Y-m-d");
 								<option value="<?php echo $row['nis'] ?>">
 									<?php echo $row['nis'] ?>
 									-
-									<?php echo $row['nama_siswa'] ?>
+									<?php echo $row['nama_siswa'];?>
+									<?php $idkelas = $row['id_kelas']; ?>
 								</option>
 								<?php
-                        }
+						}
                         ?>
 							</select>
 						</div>
@@ -97,7 +98,7 @@ $tanggal = date("Y-m-d");
 		//membuang Rp dan Titik
 		$setor_hasil=preg_replace("/[^0-9]/", "", $setor);
 
-        $sql_simpan = "INSERT INTO tb_tabungan (nis,setor,tarik,tgl,jenis,wali_kelas) VALUES (
+        $sql_simpan = "INSERT INTO tb_tabungan (nis,setor,tarik,tgl,jenis,petugas) VALUES (
           '".$_POST['nis']."',
           '".$setor_hasil."',
           '0',
