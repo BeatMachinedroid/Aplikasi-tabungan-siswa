@@ -69,15 +69,12 @@
 							<td>
 								<?php echo $data['nama_siswa']; ?>
 							</td>
-							<td>
-								<?php 
-									if ($data['jekel'] = 'KL') {
-										echo 'Laki-Laki';
-									}else{
-										echo 'Perempuan';
-									}
-								?>
-							</td>
+								<?php $jk = $data['jekel']?>
+								<?php if ($jk == 'LK') { ?>
+									<td>Laki - Laki</td>	
+								<?php }else{ ?>
+									<td>Perempuan</td>	
+								<?php }?>
 							<td>
 								<?php echo $data['kelas']; ?>
 							</td>
